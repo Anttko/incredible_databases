@@ -38,18 +38,18 @@ app.post('/api/blogs', async (req, res) => {
 })
 
 app.get('/api/blogs/:id', async (req, res) => {
-  const blogs = await Blog.findByPk(req.params.id)
-  if (blogs) {
-    res.json(blogs)
+  const blog = await Blog.findByPk(req.params.id)
+  if (blog) {
+    res.json(blog)
   } else {
     res.status(404).end()
   }
 })
 
 app.delete('/api/blogs/:id', async (req, res) => {
-  const blogs = await Blog.findByPk(req.params.id)
-  if (blogs) {
-    res.json(blogs)
+  const blog = await Blog.findByPk(req.params.id)
+  if (blog) {
+    await blog.destroy()
   } else {
     res.status(404).end()
   }
