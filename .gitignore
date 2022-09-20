@@ -1,4 +1,5 @@
 .env
+.startdb.sh
 
 # dependencies
 /node_modules
