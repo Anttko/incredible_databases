@@ -1,11 +1,21 @@
 const router = require('express').Router()
 const { tokenExtractor } = require('../util/middleware')
 const { Blog, User } = require('../models')
+const { Op } = require('sequelize')
 
 router.get('/', async (req, res) => {
+  const where = {}
+
+  if (req.query.search) {
+    where.title = {
+      [Op.substring]: req.query.search,
+    }
+  }
+
   const blogs = await Blog.findAll({
     attributes: { exclude: ['userId'] },
     include: { model: User, attributes: ['name'] },
+    where,
   })
   res.json(blogs)
 })
@@ -37,10 +47,10 @@ router.put('/:id', blogFinder, async (req, res) => {
   res.json({ likes: likedBlog.likes })
 })
 router.delete('/:id', blogFinder, async (req, res) => {
-
-
-  
-  await req.blog.destroy()
+  const body = req.body
+  if (body.blog && body.decodedToken.id === body.blog.userId) {
+    await req.blog.destroy()
+  }
   res.status(404).end()
 })
 module.exports = router
