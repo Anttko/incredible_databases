@@ -4,15 +4,19 @@ const { Blog, User } = require('../models')
 const { Op } = require('sequelize')
 
 router.get('/', async (req, res) => {
-  const where = {}
+  let where = {}
 
   if (req.query.search) {
-    where.title = {
-      [Op.substring]: req.query.search,
+    where = {
+      [Op.or]: [
+        { title: { [Op.iLike]: `${req.query.search}%` } },
+        { author: { [Op.iLike]: `${req.query.search}%` } },
+      ],
     }
   }
 
   const blogs = await Blog.findAll({
+    order: [['likes', 'DESC']],
     attributes: { exclude: ['userId'] },
     include: { model: User, attributes: ['name'] },
     where,
