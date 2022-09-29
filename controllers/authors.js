@@ -8,15 +8,7 @@ SQL query planning:
 find all blogs group by author
 count likes
 
-  attributes: [
-      'author',
-      sequelize.fn('COUNT', sequelize.col('blogs')),
-      'blogs',
-      sequelize.fn('COUNT', sequelize.col('likes')),
-      'likes',
-    ],
-    include: { model: User, attributes: ['name'] },
-    order: [['likes', 'DESC']],
+  
 */
 
 router.get('/', async (req, res) => {

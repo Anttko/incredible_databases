@@ -6,7 +6,8 @@
     "express-async-errors": "^3.1.1",
     "jsonwebtoken": "^8.5.1",
     "pg": "^8.8.0",
-    "sequelize": "^6.23.0"
+    "sequelize": "^6.23.0",
+    "umzug": "^3.2.1"
   },
   "name": "incredible-databases",
   "version": "1.0.0",
@@ -15,7 +16,8 @@
     "start": "node index.js",
     "dev": "nodemon index.js",
     "lint": "eslint .",
-    "test": "cross-env NODE_ENV=test jest --verbose --runInBand --forceExit"
+    "test": "cross-env NODE_ENV=test jest --verbose --runInBand --forceExit",
+    "migration:down": "node util/rollback.js"
   },
   "author": "",
   "license": "ISC",
