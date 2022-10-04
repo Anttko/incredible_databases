@@ -20,6 +20,7 @@ module.exports = {
       },
       read: {
         type: DataTypes.BOOLEAN,
+        allowNull: false,
         defaultValue: false,
       },
     })

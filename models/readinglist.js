@@ -8,6 +8,7 @@ Readinglist.init(
       type: DataTypes.INTEGER,
       primaryKey: true,
       autoIncrement: true,
+      allowNull: false
     },
     blogId: {
       type: DataTypes.INTEGER,
@@ -21,6 +22,7 @@ Readinglist.init(
     },
     read: {
       type: DataTypes.BOOLEAN,
+      allowNull: false,
       defaultValue: false,
     },
   },
