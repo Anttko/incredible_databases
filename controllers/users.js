@@ -10,14 +10,6 @@ router.get('/', async (req, res) => {
   })
   res.json(users)
 })
-
-/* 
- attributes: { exclude: ['id', 'password'] },
-
-    include: [{ model: Blog, attributes: { exclude: ['userId'] } }],
-
-*/
-
 router.post('/', async (req, res) => {
   const body = req.body
 
@@ -33,7 +25,7 @@ router.post('/', async (req, res) => {
 })
 
 router.get('/:id', async (req, res) => {
-  let where = {}
+  let where = undefined;
 
   if (req.query.read) {
     where = {
@@ -58,7 +50,7 @@ router.get('/:id', async (req, res) => {
         include: {
           model: Readinglist,
           attributes: { exclude: ['blogId', 'userId'] },
-          /* search value */ where,
+          /* query value */ where,
         },
       },
     ],

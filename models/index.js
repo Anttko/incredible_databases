@@ -14,8 +14,6 @@ Readinglist.belongsTo(User)
 Blog.hasMany(Readinglist)
 Readinglist.belongsTo(Blog)
 
-
-
 module.exports = {
   Blog,
   User,
