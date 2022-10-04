@@ -8,13 +8,12 @@ Blog.belongsTo(User)
 User.belongsToMany(Blog, { through: Readinglist })
 Blog.belongsToMany(User, { through: Readinglist })
 
-/*
-// Super Many-to-Many relationship
+// Super Many-to-Many relationship for better nested queries
 User.hasMany(Readinglist)
 Readinglist.belongsTo(User)
 Blog.hasMany(Readinglist)
-Readinglist.belongsTo(Readinglist)
-*/
+Readinglist.belongsTo(Blog)
+
 
 
 module.exports = {
