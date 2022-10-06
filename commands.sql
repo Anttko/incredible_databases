@@ -23,4 +23,7 @@ insert into readinglists (blog_id, user_id) values (1,1);
 insert into readinglists (blog_id, user_id) values (2,1);
 
 
+UPDATE users SET disabled = false WHERE id = 1;
+UPDATE users SET disabled = false WHERE id = 2;
 
+UPDATE users SET disabled = true WHERE id = 3;

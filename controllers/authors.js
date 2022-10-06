@@ -6,9 +6,7 @@ const { Op, Sequelize } = require('sequelize')
 /*
 SQL query planning:
 find all blogs group by author
-count likes
-
-  
+count likes 
 */
 
 router.get('/', async (req, res) => {

@@ -1,5 +1,5 @@
 const router = require('express').Router()
-const { tokenExtractor } = require('../util/middleware')
+const { tokenExtractor, checkUserSessionToken } = require('../util/middleware')
 const { Blog, User } = require('../models')
 const { Op } = require('sequelize')
 
@@ -24,7 +24,7 @@ router.get('/', async (req, res) => {
   res.json(blogs)
 })
 
-router.post('/', tokenExtractor, async (req, res) => {
+router.post('/', tokenExtractor,  checkUserSessionToken, async (req, res) => {
   const body = req.body
   const user = await User.findByPk(req.decodedToken.id)
 

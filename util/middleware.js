@@ -1,6 +1,7 @@
 const logger = require('./logger')
 const jwt = require('jsonwebtoken')
 const { SECRET } = require('../util/config')
+const { Session, User } = require('../models')
 
 const tokenExtractor = (req, res, next) => {
   const authorization = req.get('authorization')
@@ -15,6 +16,23 @@ const tokenExtractor = (req, res, next) => {
   } else {
     return res.status(401).json({ error: 'token missing' })
   }
+  next()
+}
+
+const checkUserSessionToken = async (req, res, next) => {
+  const userId = req.decodedToken.id
+
+  const session = await Session.findOne({ where: { userId } })
+  const user = await User.findByPk(userId)
+  console.log(session, user)
+
+  if (!session) {
+    return res.status(404).json({ error: 'Session expired please login!' })
+  }
+  if (user.disabled === true) {
+    return res.status(404).json({ error: 'Your account is disabled!' })
+  }
+
   next()
 }
 
@@ -46,4 +64,5 @@ module.exports = {
   errorHandler,
   tokenExtractor,
   unknownEndpoint,
+  checkUserSessionToken,
 }
